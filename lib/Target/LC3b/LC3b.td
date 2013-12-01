@@ -14,7 +14,7 @@
 include "llvm/Target/Target.td"
 
 // Register file, calling conv, instruction description
-include "LC3bRegisterInfor.td"
+include "LC3bRegisterInfo.td"
 include "LC3bSchedule.td"
 include "LC3bInstrInfo.td"
 

@@ -13,9 +13,11 @@
 
 using namespace llvm;
 
-Target llvm::TheLC3bTarget;
+Target llvm::TheLC3bTarget, llvm::TheLC3belTarget;
 
-extern "C" void LLVMInitializeLC3bTargetInfo() { 
-  RegisterTarget<Triple::lc3b> 
-    X(TheLC3bTarget, "lc3b", "LC3b [experimental]");
+extern "C" void LLVMInitializeLC3bTargetInfo()
+{
+   RegisterTarget<Triple::lc3b> X(TheLC3bTarget, "lc3b", "LC3b [experimental]");
+
+   RegisterTarget<Triple::lc3bel> Y(TheLC3belTarget, "lc3bel", "LC3bel");
 }

@@ -18,16 +18,16 @@
 #include "llvm/ADT/SmallVector.h"
 #include "llvm/CodeGen/MachineOperand.h"
 #include "llvm/Support/Compiler.h"
+#include "llvm/MC/MCInst.h"
 
 namespace llvm {
 
 class MCContext;
 class MCInst;
-class MCOperand;
 class MachineInstr;
-class MachineFunction;
 class Mangler;
 class LC3bAsmPrinter;
+
 /// LC3bMCInstLower - This class is used to lower an MachineInstr into an MCInst.
 class LLVM_LIBRARY_VISIBILITY LC3bMCInstLower {
 	typedef MachineOperand::MachineOperandType MachineOperandType;

@@ -15,8 +15,8 @@
 #define LC3BTARGETMACHINE_H
 
 #include "LC3bFrameLowering.h"
-#include "LC3bInstrInfo.h"
 #include "LC3bISelLowering.h"
+#include "LC3bInstrInfo.h"
 #include "LC3bSelectionDAGInfo.h"
 #include "LC3bSubtarget.h"
 #include "llvm/Target/TargetMachine.h"
@@ -24,8 +24,6 @@
 #include "llvm/Target/TargetFrameLowering.h"
 
 namespace llvm {
-
-class formatted_raw_ostream;
 
 class LC3bTargetMachine : public LLVMTargetMachine {
 	LC3bSubtarget		Subtarget;
@@ -39,8 +37,8 @@ public:
 						StringRef CPU, StringRef FS, const TargetOptions &Options,
 						Reloc::Model RM, CodeModel::Model CM,
 						CodeGenOpt::Level OL, bool isLittle);
-	virtual const LC3bInstrInfo const *getInstrInfo() { return &InstrInfo; }
-	virtual const TargetFrameLowering *getFrameLowering() { return &FrameLowering; }
+	virtual const LC3bInstrInfo *getInstrInfo() const { return &InstrInfo; }
+	virtual const TargetFrameLowering *getFrameLowering() const { return &FrameLowering; }
 	virtual const LC3bSubtarget	*getSubtargetImpl() const { return &Subtarget; }
 	virtual const DataLayout *getDataLayout() const { return &DL;}
 	virtual const LC3bRegisterInfo *getRegisterInfo() const { return &InstrInfo.getRegisterInfo();}

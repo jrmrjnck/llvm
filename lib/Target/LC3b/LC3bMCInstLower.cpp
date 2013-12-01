@@ -1,4 +1,3 @@
-#include "Cpu0MCInstLower.h"
 //===-- LC3bInstLower.cpp - Convert LC3b MachineInstr to an MCInst --------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -8,14 +7,15 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file contains code to lower MSP430 MachineInstrs to their corresponding
+// This file contains code to lower LC-3b MachineInstrs to their corresponding
 // MCInst records.
 //
 //===----------------------------------------------------------------------===//
 
-#include "Cpu0AsmPrinter.h"
-#include "Cpu0InstrInfo.h"
-#include "MCTargetDesc/Cpu0BaseInfo.h"
+#include "LC3bMCInstLower.h"
+#include "LC3bAsmPrinter.h"
+#include "LC3bInstrInfo.h"
+#include "MCTargetDesc/LC3bBaseInfo.h"
 #include "llvm/CodeGen/MachineFunction.h"
 #include "llvm/CodeGen/MachineInstr.h"
 #include "llvm/CodeGen/MachineOperand.h"
@@ -26,14 +26,14 @@
 
 using namespace llvm;
 
-Cpu0MCInstLower::Cpu0MCInstLower(Cpu0AsmPrinter &asmprinter) : AsmPrinter(asmprinter) {}
+LC3bMCInstLower::LC3bMCInstLower(LC3bAsmPrinter &asmprinter) : AsmPrinter(asmprinter) {}
 
-void Cpu0MCInstLower::Initialize(Mangler *M, MCContext* C) {
+void LC3bMCInstLower::Initialize(Mangler *M, MCContext* C) {
 	Mang = M;
 	Ctx = C;
 }
 
-MCOperand Cpu0MCInstLower::LowerSymbolOperand(const MachineOperand &MO, MachineOperandType MOTy, unsigned Offset) const {
+MCOperand LC3bMCInstLower::LowerSymbolOperand(const MachineOperand &MO, MachineOperandType MOTy, unsigned Offset) const {
 	MCSymbolRefExpr::VariantKind Kind;
 	const MCSymbol *Symbol;
 	switch(MO.getTargetFlags()) {
@@ -42,7 +42,8 @@ MCOperand Cpu0MCInstLower::LowerSymbolOperand(const MachineOperand &MO, MachineO
 	}
 	switch (MOTy) {
 		case MachineOperand::MO_GlobalAddress:
-			Symbol = Mang->getSymbol(MO.getGlobal());
+         // FIXME
+			//Symbol = Mang->getSymbol(MO.getGlobal());
 			break;
 		default:
 			llvm_unreachable("<unknown operand type>");
@@ -57,7 +58,7 @@ MCOperand Cpu0MCInstLower::LowerSymbolOperand(const MachineOperand &MO, MachineO
 	return MCOperand::CreateExpr(AddExpr);
 }
 
-MCOperand Cpu0MCInstLower::LowerOperand(const MachineOperand& MO, unsigned offset) const {
+MCOperand LC3bMCInstLower::LowerOperand(const MachineOperand& MO, unsigned offset) const {
 	MachineOperandType MOTy = MO.getType();
 	switch (MOTy) {
 		default: llvm_unreachable("unknown operand type");
@@ -73,7 +74,7 @@ MCOperand Cpu0MCInstLower::LowerOperand(const MachineOperand& MO, unsigned offse
 	return MCOperand();
 }
 
-void Cpu0MCInstLower::Lower(const MachineInstr *MI, MCInst &OutMI) const {
+void LC3bMCInstLower::Lower(const MachineInstr *MI, MCInst &OutMI) const {
 	OutMI.setOpcode(MI->getOpcode());
 	for (unsigned i = 0, e = MI->getNumOperands(); i != e; ++i) {
 		const MachineOperand &MO = MI->getOperand(i);

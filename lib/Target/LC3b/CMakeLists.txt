@@ -9,7 +9,7 @@ tablegen(LLVM LC3bGenSubtargetInfo.inc -gen-subtarget)
 tablegen(LLVM LC3bGenCodeEmitter.inc -gen-emitter)
 tablegen(LLVM LC3bGenMCCodeEmitter.inc -gen-emitter -mc-emitter)
 tablegen(LLVM LC3bGenAsmWriter.inc -gen-asm-writer)
-
+tablegen(LLVM LC3bGenCallingConv.inc -gen-callingconv)
 
 # LC3bCommonTableGen must be defined
 add_public_tablegen_target(LC3bCommonTableGen)
@@ -21,7 +21,7 @@ add_llvm_target(LC3bCodeGen LC3bTargetMachine.cpp)
 # should match with "subdirectories = MCTargetDesc TargetInfo" in LLVMBuild.txt
 add_subdirectory(TargetInfo)
 add_subdirectory(MCTargetDesc)
-#add_subdirectory(InstPrinter)
+add_subdirectory(InstPrinter)
 
 # LC3bCodeGen should match with LLVMBuild.txt LC3bCodeGen
 add_llvm_target(

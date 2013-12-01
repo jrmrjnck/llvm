@@ -44,7 +44,7 @@ using namespace llvm;
 // Offset
 //
 // 0
-----------
+// ----------
 // 4 Args to pass
 // . saved $GP (used in PIC)
 // . Alloca allocations
@@ -54,7 +54,7 @@ using namespace llvm;
 // . saved RA
 // . FPU "Callee Saved" Registers
 // StackSize
------------
+// -----------
 //
 // Offset - offset from sp after stack allocation on function prologue
 //

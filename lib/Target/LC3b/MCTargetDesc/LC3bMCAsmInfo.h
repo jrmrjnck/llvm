@@ -7,7 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file contains the declaration of the Cpu0MCAsmInfo class.
+// This file contains the declaration of the LC3bMCAsmInfo class.
 //
 //===----------------------------------------------------------------------===//
 
@@ -18,11 +18,10 @@
 
 namespace llvm {
 		class StringRef;
-		class Target;
 		class LC3bMCAsmInfo : public MCAsmInfo {
 				virtual void anchor();
 				public:
-				explicit LC3bMCAsmInfo(const Target &T, StringRef TT);
+				explicit LC3bMCAsmInfo(StringRef TT);
 		};
 } // namespace llvm
 

@@ -13,7 +13,6 @@
 #define LC3b_FRAMEINFO_H
 
 #include "LC3b.h"
-#include "LC3bSubtarget.h"
 #include "llvm/Target/TargetFrameLowering.h"
 
 namespace llvm {
@@ -22,7 +21,7 @@ namespace llvm {
 				protected:
 				const LC3bSubtarget &STI;
 				public:
-				explicit LC3bFrameLowering(const Cpu0Subtarget &sti) : TargetFrameLowering(StackGrowsDown, 8, 0),STI(sti) {
+				explicit LC3bFrameLowering(const LC3bSubtarget &sti) : TargetFrameLowering(StackGrowsDown, 8, 0),STI(sti) {
 				}
 				/// emitProlog/emitEpilog - These methods insert prolog and epilog code into
 				/// the function.

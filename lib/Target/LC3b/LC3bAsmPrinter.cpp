@@ -110,7 +110,7 @@ void LC3bAsmPrinter::printSavedRegsBitmask(raw_ostream &O) {
 	const std::vector<CalleeSavedInfo> &CSI = MFI->getCalleeSavedInfo();
 
 	// size of stack area to which FP callee-saved regs are saved.
-	unsigned CPURegSize = LC3b::CPURegsRegClass.getSize();
+	unsigned CPURegSize = LC3b::LC3bRegsRegClass.getSize();
 	unsigned i = 0, e = CSI.size();
 
 	// Set CPU Bitmask.
@@ -123,9 +123,8 @@ void LC3bAsmPrinter::printSavedRegsBitmask(raw_ostream &O) {
 	CPUTopSavedRegOff = CPUBitmask ? -CPURegSize : 0;
 	// Print CPUBitmask
 
-	O << "\t.mask \t"; printHex32(CPUBitmask, O);
-	O << ’,’ << CPUTopSavedRegOff << ’\n’;
-
+   O << "\t.mask \t"; printHex32(CPUBitmask, O);
+   O << ',' << CPUTopSavedRegOff << '\n';
 }
 
 // Print a 32 bit hex number with all numbers. FIXME
@@ -161,10 +160,8 @@ void LC3bAsmPrinter::emitFrameDirective() {
 
 /// Emit Set directives.
 const char *LC3bAsmPrinter::getCurrentABIString() const {
-	switch (Subtarget->getTargetABI()) {
-		case LC3bSubtarget::O32: return "abi32";
-		default: llvm_unreachable("Unknown LC3b ABI");;
-	}
+   // FIXME
+   llvm_unreachable("Unknown LC3b ABI");;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -188,6 +185,7 @@ void LC3bAsmPrinter::EmitFunctionEntryLabel() {
 /// the first basic block in the function.
 
 void LC3bAsmPrinter::EmitFunctionBodyStart() {
+   // FIXME
 	MCInstLowering.Initialize(Mang, &MF->getContext());
 	emitFrameDirective();
 	if (OutStreamer.hasRawTextSupport()) {
@@ -197,8 +195,8 @@ void LC3bAsmPrinter::EmitFunctionBodyStart() {
 		OutStreamer.EmitRawText(OS.str());
 		OutStreamer.EmitRawText(StringRef("\t.set\tnoreorder"));
 		OutStreamer.EmitRawText(StringRef("\t.set\tnomacro"));
-		if (LC3bFI->getEmitNOAT())
-			OutStreamer.EmitRawText(StringRef("\t.set\tat"));
+		//if (LC3bFI->getEmitNOAT())
+			//OutStreamer.EmitRawText(StringRef("\t.set\tat"));
 	}
 }
 
@@ -215,8 +213,9 @@ void LC3bAsmPrinter::EmitFunctionBodyEnd() {
 // always be at the function end, and we can’t emit and
 // break with BB logic.
 	if (OutStreamer.hasRawTextSupport()) {
-		if (LC3bFI->getEmitNOAT())
-			OutStreamer.EmitRawText(StringRef("\t.set\tat"));
+      // FIXME
+		//if (LC3bFI->getEmitNOAT())
+			//OutStreamer.EmitRawText(StringRef("\t.set\tat"));
 		OutStreamer.EmitRawText(StringRef("\t.set\tmacro"));
 		OutStreamer.EmitRawText(StringRef("\t.set\treorder"));
 		OutStreamer.EmitRawText("\t.end\t" + Twine(CurrentFnSym->getName()));

@@ -36,7 +36,7 @@ let Namespace = "LC3b" in {
 	def R5 : LC3bGPRReg <5, "R5">, 	DwarfRegNum<[5]>;
 	def R6 : LC3bGPRReg <6, "R6">, 	DwarfRegNum<[6]>;
 	def R7 : LC3bGPRReg <7, "R7">, 	DwarfRegNum<[7]>;
-	def PC : LC3bGPRReg <8, "PC">, 	DwarfRegNum<[9]>;
+// def PC : LC3bGPRReg <8, "PC">, 	DwarfRegNum<[9]>;
 //	def PSR : LC3bGPRReg <9, "PSR">,DwarfRegNum<[8]>;
 //	def IR : LC3bGPRReg <10, "IR">, DwarfRegNum<[10]>;
 
@@ -49,7 +49,7 @@ def LC3bRegs : RegisterClass <"LC3b", [i16], 16,
 	( add R0, R1, R2, R3, R4, R5,
 		//not allocatable registers
 	    R6, 	//Stack Pointer
-	    R7, 	// Return Address
+	    R7 	// Return Address
 //	    PSR, 	// Status Register
 //	    IR, 	// Instruction Register
 	)>;

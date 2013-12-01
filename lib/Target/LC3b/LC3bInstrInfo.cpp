@@ -14,12 +14,17 @@
 #include "LC3bInstrInfo.h"
 #include "LC3bTargetMachine.h"
 
-#define GET_INSTRINFO_CTOR
+#define GET_INSTRINFO_CTOR_DTOR
 #include "LC3bGenInstrInfo.inc"
 
 using namespace llvm;
-LC3bInstrInfo::LC3bInstrInfo(LC3bTargetMachine &tm) : TM(tm), RI(*TM.getSubtargetImpl(), *this) {}
 
-const LC3bRegisterInfo &LC3bInstrInfo::getRegisterInfo() const {
-		return RI;
+LC3bInstrInfo::LC3bInstrInfo(LC3bTargetMachine &tm)
+ : TM(tm), 
+   RI(tm)
+{}
+
+const LC3bRegisterInfo &LC3bInstrInfo::getRegisterInfo() const
+{
+   return RI;
 }

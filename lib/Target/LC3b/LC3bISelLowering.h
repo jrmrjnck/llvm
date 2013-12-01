@@ -21,6 +21,9 @@
 #include "llvm/Target/TargetLowering.h"
 
 namespace llvm {
+
+   class LC3bTargetMachine;
+
    namespace LC3bISD {
       enum NodeType {
          // Start the numbering from where ISD NodeType finishes.
@@ -38,9 +41,20 @@ namespace llvm {
          // Subtarget Info
          const LC3bSubtarget *Subtarget;
          //- must be exist without function all
-         virtual SDValue LowerFormalArguments(SDValue Chain,CallingConv::ID CallConv, bool isVarArg,const SmallVectorImpl<ISD::InputArg> &Ins, DebugLoc dl, SelectionDAG &DAG, SmallVectorImpl<SDValue> &InVals) const;
+         virtual SDValue LowerFormalArguments(SDValue Chain,
+                                              CallingConv::ID CallConv,
+                                              bool isVarArg,
+                                              const SmallVectorImpl<ISD::InputArg> &Ins,
+                                              SDLoc dl,
+                                              SelectionDAG &DAG,
+                                              SmallVectorImpl<SDValue> &InVals) const;
          //- must be exist without function all
-         virtual SDValue LowerReturn(SDValue Chain,CallingConv::ID CallConv, bool isVarArg,const SmallVectorImpl<ISD::OutputArg> &Outs,const SmallVectorImpl<SDValue> &OutVals,DebugLoc dl, SelectionDAG &DAG) const;
+         virtual SDValue LowerReturn(SDValue Chain,CallingConv::ID CallConv,
+                                     bool isVarArg,
+                                     const SmallVectorImpl<ISD::OutputArg> &Outs,
+                                     const SmallVectorImpl<SDValue> &OutVals,
+                                     SDLoc dl,
+                                     SelectionDAG &DAG) const;
    };
 }
 

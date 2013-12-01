@@ -16,7 +16,7 @@
 ;===------------------------------------------------------------------------===;
 
 [common] 
-subdirectories = MCTargetDesc TargetInfo
+subdirectories = MCTargetDesc TargetInfo InstPrinter
 
 [component_0]
 # TargetGroup components are an extension of LibraryGroups, specifically for 

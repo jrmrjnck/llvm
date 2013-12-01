@@ -7,7 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file defines the Cpu0 subclass for TargetSelectionDAGInfo.
+// This file defines the LC-3b subclass for TargetSelectionDAGInfo.
 //
 //===----------------------------------------------------------------------===//
 

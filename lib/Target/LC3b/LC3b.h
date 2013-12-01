@@ -8,12 +8,15 @@
 //===----------------------------------------------------------------------===//
 //
 // This file contains the entry points for global functions defined in
-// the LLVM MSP430 backend.
+// the LLVM LC-3b backend.
 //
 //===----------------------------------------------------------------------===//
 
 #ifndef TARGET_LC3b_H
 #define TARGET_LC3b_H
+
+#include "MCTargetDesc/LC3bMCTargetDesc.h"
+#include "llvm/Target/TargetMachine.h"
 
 namespace llvm
 {

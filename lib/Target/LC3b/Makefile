@@ -18,8 +18,9 @@ BUILT_SOURCES = \
 	LC3bGenSubtargetInfo.inc\
 	LC3bGenCodeEmitter.inc\
 	LC3bGenMCCodeEmitter.inc\
-	LC3bGenAsmWriter.inc
+	LC3bGenAsmWriter.inc\
+	LC3bGenCallingConv.inc
 
-DIRS = TargetInfo MCTargetDesc #InstPrinter 
+DIRS = TargetInfo MCTargetDesc InstPrinter 
 
 include $(LEVEL)/Makefile.common

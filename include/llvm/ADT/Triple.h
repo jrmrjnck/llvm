@@ -49,6 +49,8 @@ public:
     arm,     // ARM: arm, armv.*, xscale
     aarch64, // AArch64: aarch64
     hexagon, // Hexagon: hexagon
+    lc3b,    // LC-3b
+    lc3bel,  // LC-3b: little-endian
     mips,    // MIPS: mips, mipsallegrex
     mipsel,  // MIPSEL: mipsel, mipsallegrexel
     mips64,  // MIPS64: mips64

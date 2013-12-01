@@ -19,5 +19,5 @@
 type = Library
 name = LC3bDesc
 parent = LC3b
-required_libraries = MC LC3bAsmPrinter LC3bInfo Support Target
+required_libraries = MC LC3bInfo Support Target
 add_to_library_groups = LC3b

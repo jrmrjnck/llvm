@@ -37,8 +37,6 @@ parent = Target
 #please enable asmprinter
 has_asmprinter=1
 
-
-
 [component_1]
 # component_1 is a Library type and name is LC3bCodeGen. After build it will
 # in lib/libLLVMCpu0CodeGen.a of your build command directory.
@@ -51,14 +49,7 @@ parent = LC3b
 # include the transitive closure of all required_libraries for the components
 # the tool needs.
 
-required_libraries = CodeGen Core MC LC3bDesc LC3bInfo SelectionDAG Support Target AsmPrinter LC3bAsmPrinter
+required_libraries = CodeGen Core MC LC3bDesc LC3bInfo SelectionDAG Support Target AsmPrinter
 # All LLVMBuild.txt in Target/LC3b and subdirectory use ’add_to_library_groups
 # = LC3b'
 add_to_library_groups = LC3b
-
-
-
-
-
-
-

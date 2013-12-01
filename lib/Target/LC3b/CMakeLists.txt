@@ -21,7 +21,7 @@ add_llvm_target(LC3bCodeGen LC3bTargetMachine.cpp)
 # should match with "subdirectories = MCTargetDesc TargetInfo" in LLVMBuild.txt
 add_subdirectory(TargetInfo)
 add_subdirectory(MCTargetDesc)
-add_subdirectory(InstPrinter)
+#add_subdirectory(InstPrinter)
 
 # LC3bCodeGen should match with LLVMBuild.txt LC3bCodeGen
 add_llvm_target(

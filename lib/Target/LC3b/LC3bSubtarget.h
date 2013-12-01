@@ -1,4 +1,4 @@
-//===-- LC3bSubtarget.h - -------*- C++ -*-===//
+//===-- LC3bSubtarget.h - Define Subtarget for the LC-3b --------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
 //

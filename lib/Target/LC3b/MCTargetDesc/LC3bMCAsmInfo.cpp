@@ -22,10 +22,6 @@ LC3bMCAsmInfo::LC3bMCAsmInfo(StringRef TT)
 {
    Triple TheTriple(TT);
 
-   if ((TheTriple.getArch() == Triple::lc3b)) //FIXME : LC3b or lc3b
-      // FIXME: everything below this line
-      IsLittleEndian = false;
-
    AlignmentIsInBytes = false;
    Data16bitsDirective = "\t.2byte\t";
    Data32bitsDirective = "\t.4byte\t";

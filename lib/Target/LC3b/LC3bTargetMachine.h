@@ -33,10 +33,10 @@ class LC3bTargetMachine : public LLVMTargetMachine {
 	LC3bTargetLowering 	TLInfo;			//- Stack(Frame) and Stack direction
 	LC3bSelectionDAGInfo TSInfo;		//- Map .bc DAG to backend DAG
 public:
-	LC3bTargetMachine(	const Target &T, StringRef TT,
+	LC3bTargetMachine(const Target &T, StringRef TT,
 						StringRef CPU, StringRef FS, const TargetOptions &Options,
 						Reloc::Model RM, CodeModel::Model CM,
-						CodeGenOpt::Level OL, bool isLittle);
+						CodeGenOpt::Level OL );
 	virtual const LC3bInstrInfo *getInstrInfo() const { return &InstrInfo; }
 	virtual const TargetFrameLowering *getFrameLowering() const { return &FrameLowering; }
 	virtual const LC3bSubtarget	*getSubtargetImpl() const { return &Subtarget; }
@@ -47,26 +47,6 @@ public:
 	virtual const LC3bSelectionDAGInfo* getSelectionDAGInfo() const { return &TSInfo; }
 	// Pass Pipeline Configuration
 	virtual TargetPassConfig *createPassConfig(PassManagerBase &PM);
-};
-/// LC3bTargetMachine - LC3b little endian target machine.
-/// Little Endian Check!	FIXME
-class LC3bebTargetMachine : public LC3bTargetMachine {
-	virtual void anchor();
-public:
-	LC3bebTargetMachine(const Target &T, StringRef TT,
-	StringRef CPU, StringRef FS, const TargetOptions &Options,
-	Reloc::Model RM, CodeModel::Model CM,
-	CodeGenOpt::Level OL);
-};
-/// LC3belTargetMachine - LC3b32 little endian target machine.
-///	FIXME
-class LC3belTargetMachine : public LC3bTargetMachine {
-virtual void anchor();
-public:
-	LC3belTargetMachine(const Target &T, StringRef TT,
-						StringRef CPU, StringRef FS, const TargetOptions &Options,
-						Reloc::Model RM, CodeModel::Model CM,
-						CodeGenOpt::Level OL);
 };
 
 } // End llvm namespace

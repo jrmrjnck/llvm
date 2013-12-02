@@ -13,7 +13,6 @@
 namespace llvm {
 		class Target;
 		extern Target TheLC3bTarget;
-		extern Target TheLC3belTarget;
 } // End llvm namespace
 
 // Defines symbolic names for LC3bregisters. This defines a mapping from

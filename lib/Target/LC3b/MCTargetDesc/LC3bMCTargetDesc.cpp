@@ -47,7 +47,7 @@ static std::string ParseLC3bTriple(StringRef TT, StringRef CPU) {
 				// We are only interested in substring before dash.
 				TheTriple = TT.substr(0,DashPosition);
 		}
-		if (TheTriple == "lc3b" || TheTriple == "lc3bel") {
+		if (TheTriple == "lc3b"){
 				if (CPU.empty() || CPU == "lc3b32") {  //FIXME : cpu0 name
 						LC3bArchFeature = "+lc3b32";
 				}
@@ -110,28 +110,20 @@ static MCInstPrinter *createLC3bMCInstPrinter(const Target &T,
 extern "C" void LLVMInitializeLC3bTargetMC() {
    // Register the MC asm info.
    // FIXME
-   //RegisterMCAsmInfoFn X(TheLC3bTarget, createLC3bMCAsmInfo);
-   //RegisterMCAsmInfoFn Y(TheLC3belTarget, createLC3bMCAsmInfo);
    RegisterMCAsmInfo<LC3bMCAsmInfo> X(TheLC3bTarget);
-   RegisterMCAsmInfo<LC3bMCAsmInfo> Y(TheLC3belTarget);
 
    // Register the MC codegen info.
    TargetRegistry::RegisterMCCodeGenInfo(TheLC3bTarget, createLC3bMCCodeGenInfo);
-   TargetRegistry::RegisterMCCodeGenInfo(TheLC3belTarget, createLC3bMCCodeGenInfo);
 
    // Register the MC instruction info.
    TargetRegistry::RegisterMCInstrInfo(TheLC3bTarget, createLC3bMCInstrInfo);
-   TargetRegistry::RegisterMCInstrInfo(TheLC3belTarget, createLC3bMCInstrInfo);
 
    // Register the MC register info.
    TargetRegistry::RegisterMCRegInfo(TheLC3bTarget, createLC3bMCRegisterInfo);
-   TargetRegistry::RegisterMCRegInfo(TheLC3belTarget, createLC3bMCRegisterInfo);
 
    // Register the MC subtarget info.
    TargetRegistry::RegisterMCSubtargetInfo(TheLC3bTarget, createLC3bMCSubtargetInfo);
-   TargetRegistry::RegisterMCSubtargetInfo(TheLC3belTarget, createLC3bMCSubtargetInfo);
 
    // Register the MCInstPrinter.
    TargetRegistry::RegisterMCInstPrinter(TheLC3bTarget, createLC3bMCInstPrinter);
-   TargetRegistry::RegisterMCInstPrinter(TheLC3belTarget, createLC3bMCInstPrinter);
 }

@@ -26,10 +26,8 @@ void LC3bSubtarget::anchor() {}
 
 LC3bSubtarget::LC3bSubtarget(const std::string &TT,
                              const std::string &CPU,
-                             const std::string &FS,
-                             bool little)
- : LC3bGenSubtargetInfo(TT, CPU, FS),
-   IsLittle(little)
+                             const std::string &FS)
+ : LC3bGenSubtargetInfo(TT, CPU, FS)
 {
    std::string CPUName = CPU;
    if (CPUName.empty())

@@ -249,6 +249,5 @@ void LC3bAsmPrinter::PrintDebugValueComment(const MachineInstr *MI, raw_ostream 
 // Force static initialization.
 extern "C" void LLVMInitializeLC3bAsmPrinter() {
 	RegisterAsmPrinter<LC3bAsmPrinter> X(TheLC3bTarget);
-	RegisterAsmPrinter<LC3bAsmPrinter> Y(TheLC3belTarget);
 }
 

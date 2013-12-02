@@ -80,16 +80,16 @@ class DestOneSrcForm<bits<4> opcode, SourceMode immsext5, SourceMode src2,
 }
 
 
-class DestOneSrcForm_load<bits<4> opcode, SourceMode immsext5, SourceMode src2,
+class DestOneSrcForm_load<bits<4> opcode, SourceMode addr, SourceMode src2,
                      dag outs, dag ins, string asmstr, list<dag> pattern>
  : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr>
 {
-   bits<6> immsext6;
-   bits<3> src2;
+   bits<6> addr;
+   bits<3> src1;
    bits<3> dst;
    let Pattern = pattern;  
-   let Inst{5-0}=immsext6;
-   let Inst{8-6}=src2;
+   let Inst{5-0}=addr{0-5};
+   let Inst{8-6}=src1;
    let Inst{11-9}=dst;
 }
 

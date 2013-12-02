@@ -44,7 +44,9 @@ LC3bTargetMachine::LC3bTargetMachine(const Target &T,
    FrameLowering(Subtarget), 
    TLInfo(*this), 
    TSInfo(*this) 
-{}
+{
+   initAsmInfo();
+}
 
 namespace {
 /// LC3b Code Generator Pass Configuration Options.

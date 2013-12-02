@@ -19,7 +19,8 @@ BUILT_SOURCES = \
 	LC3bGenCodeEmitter.inc\
 	LC3bGenMCCodeEmitter.inc\
 	LC3bGenAsmWriter.inc\
-	LC3bGenCallingConv.inc
+	LC3bGenCallingConv.inc\
+	LC3bGenDAGISel.inc
 
 DIRS = TargetInfo MCTargetDesc InstPrinter 
 

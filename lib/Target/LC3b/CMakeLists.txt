@@ -10,10 +10,10 @@ tablegen(LLVM LC3bGenCodeEmitter.inc -gen-emitter)
 tablegen(LLVM LC3bGenMCCodeEmitter.inc -gen-emitter -mc-emitter)
 tablegen(LLVM LC3bGenAsmWriter.inc -gen-asm-writer)
 tablegen(LLVM LC3bGenCallingConv.inc -gen-callingconv)
+tablegen(LLVM LC3bGenDAGISel.inc -gen-dag-isel)
 
 # LC3bCommonTableGen must be defined
 add_public_tablegen_target(LC3bCommonTableGen)
-
 
 # cpuCodeGen Should match with LLVMBuild.tx LC3bCodeGen
 add_llvm_target(LC3bCodeGen LC3bTargetMachine.cpp)
@@ -35,5 +35,5 @@ add_llvm_target(
    LC3bSubtarget.cpp
    LC3bTargetMachine.cpp
    LC3bSelectionDAGInfo.cpp
+   LC3bDagToDagISel.cpp
 )
-

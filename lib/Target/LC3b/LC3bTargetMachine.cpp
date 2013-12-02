@@ -39,7 +39,7 @@ LC3bTargetMachine::LC3bTargetMachine(const Target &T,
                                      CodeGenOpt::Level OL)
  : LLVMTargetMachine(T, TT, CPU, FS, Options, RM, CM, OL), 
    Subtarget(TT, CPU, FS),
-   DL(("e-p:32:32:32-i8:8:32-i16:16:32-i64:64:64-n32")), // FIXME
+   DL(("e-p:16:16:16-i8:8:8-i16:16:16-n16")),
    InstrInfo(*this), 
    FrameLowering(Subtarget), 
    TLInfo(*this), 

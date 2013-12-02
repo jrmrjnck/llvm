@@ -43,14 +43,21 @@ namespace llvm {
 				virtual bool runOnMachineFunction(MachineFunction &MF);
 				//- EmitInstruction() must exists or will have run time error.
 				void EmitInstruction(const MachineInstr *MI);
-				void printSavedRegsBitmask(raw_ostream &O);
+				
 				void printHex32(unsigned int Value, raw_ostream &O);
+				void printHex16(unsigned int Value, raw_ostream &O);
+				void printDecimal32(unsigned int Value, raw_ostream &O);
+				void printDecimal16(unsigned int Value, raw_ostream &O);
+				
 				void emitFrameDirective();
 				const char *getCurrentABIString() const;
 				virtual void EmitFunctionEntryLabel();
 				virtual void EmitFunctionBodyStart();
 				virtual void EmitFunctionBodyEnd();
+				
 				void EmitStartOfAsmFile(Module &M);
+				void EmitEndOfAsmFile(Module &M);
+				
 				virtual MachineLocation getDebugValueLocation(const MachineInstr *MI) const;
 				void PrintDebugValueComment(const MachineInstr *MI, raw_ostream &OS);
 		};

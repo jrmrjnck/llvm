@@ -20,7 +20,9 @@
 
 namespace llvm
 {
+   class LC3bTargetMachine;
 
+   FunctionPass* createLC3bISelDag( LC3bTargetMachine& tm, CodeGenOpt::Level optLevel );
 }
 
 #endif // !TARGET_LC3b_H

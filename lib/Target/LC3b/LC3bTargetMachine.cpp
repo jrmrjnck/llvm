@@ -60,6 +60,12 @@ public:
 	const LC3bSubtarget &getLC3bSubtarget() const {
 		return *getLC3bTargetMachine().getSubtargetImpl();
 	}
+
+   bool addInstSelector()
+   {
+      addPass( createLC3bISelDag(getLC3bTargetMachine(),getOptLevel()) );
+      return false;
+   }
 };
 
 } // namespace

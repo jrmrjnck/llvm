@@ -32,7 +32,7 @@ class DestMode<bit val> {
 def DstReg : DestMode<0>;
 def DstMem : DestMode<1>;
 
-class LC3bInst<bits<4> opcode, dag outs, dag ins, Format f, string asmstr> : Instruction
+class LC3bInst<bits<4> opcode, dag outs, dag ins, Format f, string asmstr, InstrItinClass itin> : Instruction
 {
    field bits<16> Inst;
 
@@ -52,8 +52,8 @@ class LC3bInst<bits<4> opcode, dag outs, dag ins, Format f, string asmstr> : Ins
 }
 
 class DestTwoSrcForm<bits<4> opcode, SourceMode src1, SourceMode src2,
-                     dag outs, dag ins, string asmstr, list<dag> pattern>
- : LC3bInst<opcode, outs, ins, DestTwoSrc, asmstr>
+                     dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : LC3bInst<opcode, outs, ins, DestTwoSrc, asmstr, itin>
 {
    bits<3> src1;
    bits<3> src2;
@@ -67,8 +67,8 @@ class DestTwoSrcForm<bits<4> opcode, SourceMode src1, SourceMode src2,
 
 
 class DestOneSrcForm<bits<4> opcode, SourceMode immsext5, SourceMode src2,
-                     dag outs, dag ins, string asmstr, list<dag> pattern>
- : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr>
+                     dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr, itin>
 {
    bits<5> immsext5;
    bits<3> src2;
@@ -80,22 +80,22 @@ class DestOneSrcForm<bits<4> opcode, SourceMode immsext5, SourceMode src2,
 }
 
 
-class DestOneSrcForm_load<bits<4> opcode, SourceMode immsext5, SourceMode src2,
-                     dag outs, dag ins, string asmstr, list<dag> pattern>
- : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr>
+class DestOneSrcForm_load<bits<4> opcode, SourceMode addr, SourceMode src2,
+                     dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr, itin>
 {
-   bits<6> immsext6;
-   bits<3> src2;
+   bits<6> addr;
+   bits<3> src1;
    bits<3> dst;
    let Pattern = pattern;  
-   let Inst{5-0}=immsext6;
-   let Inst{8-6}=src2;
+   let Inst{5-0}=addr{0-5};
+   let Inst{8-6}=src1;
    let Inst{11-9}=dst;
 }
 
 class DestOneSrcForm_shf<bits<4> opcode, SourceMode immext4, SourceMode src2,
-                     dag outs, dag ins, string asmstr, list<dag> pattern>
- : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr>
+                     dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr, itin>
 {
    bits<4> immext4;
    bits<3> src2;
@@ -109,8 +109,8 @@ class DestOneSrcForm_shf<bits<4> opcode, SourceMode immext4, SourceMode src2,
 
 
 
-class DestOneSrcForm_lea<bits<4> opcode, SourceMode immsext9, dag outs, dag ins, string asmstr, list<dag> pattern>
- : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr>
+class DestOneSrcForm_lea<bits<4> opcode, SourceMode immsext9, dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : LC3bInst<opcode, outs, ins, DestOneSrc, asmstr, itin>
 {
    bits<9> immsext9;
    bits<3> dst;
@@ -119,6 +119,18 @@ class DestOneSrcForm_lea<bits<4> opcode, SourceMode immsext9, dag outs, dag ins,
    let Inst{11-9}=dst;
 }
 
+class jsrrForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+: LC3bInst<opcode, outs, ins, OneSrc, asmstr, itin> {
+	let isBranch = 1;
+	let isTerminator = 1;
+	let isBarrier = 1;
+	let hasDelaySlot = 0;
+	let Pattern = pattern;
+
+	bits<11> addr;
+	let Inst{11} = 1;
+	let Inst{10-0} = addr;
+}
 
 
 
@@ -143,36 +155,36 @@ class DestOneSrcForm_lea<bits<4> opcode, SourceMode immsext9, dag outs, dag ins,
 
 
 
-class rrForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern>
- : DestTwoSrcForm<opcode, SrcReg, SrcReg, outs, ins, asmstr, pattern>
+class rrForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : DestTwoSrcForm<opcode, SrcReg, SrcReg, outs, ins, asmstr, pattern, itin>
 {
    let Inst{5-3} = 0;
    
 }
 
 
-class riForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern>
- : DestOneSrcForm<opcode, SrcImm, SrcReg, outs, ins, asmstr, pattern>
+class riForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : DestOneSrcForm<opcode, SrcImm, SrcReg, outs, ins, asmstr, pattern, itin>
 {
    let Inst{5} = 1;
 }
 
 
 
-class memForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern>
- : DestOneSrcForm_load<opcode, SrcMem, SrcReg, outs, ins, asmstr, pattern>
+class memForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : DestOneSrcForm_load<opcode, SrcMem, SrcReg, outs, ins, asmstr, pattern, itin>
 {
 
 }
 
-class shfForm<bits<4> opcode,bits<2> select, dag outs, dag ins, string asmstr, list<dag> pattern>
- : DestOneSrcForm_shf<opcode, SrcImm, SrcReg, outs, ins, asmstr, pattern>
+class shfForm<bits<4> opcode,bits<2> select, dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : DestOneSrcForm_shf<opcode, SrcImm, SrcReg, outs, ins, asmstr, pattern, itin>
 {
 	let Inst {6-5}=select;
 }
 
-class leaForm<bits<4> opcode,dag outs, dag ins, string asmstr, list<dag> pattern>
- : DestOneSrcForm_lea<opcode, SrcImm,outs, ins, asmstr, pattern>
+class leaForm<bits<4> opcode,dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+ : DestOneSrcForm_lea<opcode, SrcImm,outs, ins, asmstr, pattern, itin>
 {
 	
 }

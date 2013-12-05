@@ -45,3 +45,12 @@ void LC3bInstPrinter::printSrcMemOperand(const MCInst *MI, unsigned OpNo,
 void LC3bInstPrinter::printCCOperand(const MCInst *MI, unsigned OpNo,
                                        raw_ostream &O) {
 }
+
+
+void LC3bInstPrinter::printMemOperandEA(const MCInst * MI, int opNum, raw_ostream & O) {
+	
+}
+
+void LC3bInstPrinter::printMemOperand(const MCInst * MI, int opNum, raw_ostream & O) {
+	
+}

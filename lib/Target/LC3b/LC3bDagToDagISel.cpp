@@ -37,6 +37,7 @@ namespace
    private:
       SDNode* Select( SDNode* n );
 
+      bool SelectAddr(SDNode *Parent, SDValue N, SDValue &Base, SDValue &Offset);
       #include "LC3bGenDAGISel.inc"
    };
 }
@@ -45,6 +46,11 @@ SDNode* LC3bDagToDagISel::Select( SDNode* n )
 {
    // FIXME
    return NULL;
+}
+
+bool SelectAddr(SDNode *Parent, SDValue Addr, SDValue &Base, SDValue &Offset)
+{
+   return true;
 }
 
 FunctionPass* llvm::createLC3bISelDag( LC3bTargetMachine& tm, CodeGenOpt::Level optLevel )

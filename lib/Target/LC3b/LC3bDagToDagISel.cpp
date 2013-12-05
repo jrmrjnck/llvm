@@ -48,7 +48,7 @@ SDNode* LC3bDagToDagISel::Select( SDNode* n )
    return NULL;
 }
 
-bool SelectAddr(SDNode *Parent, SDValue Addr, SDValue &Base, SDValue &Offset)
+bool LC3bDagToDagISel::SelectAddr(SDNode *Parent, SDValue Addr, SDValue &Base, SDValue &Offset)
 {
    return true;
 }

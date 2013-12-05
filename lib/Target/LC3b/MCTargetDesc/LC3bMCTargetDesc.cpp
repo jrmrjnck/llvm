@@ -78,25 +78,6 @@ StringRef FS) {
 		return X;
 }
 
-// FIXME : No need for Target arg anymore?
-static MCAsmInfo *createLC3bMCAsmInfo(const Target &T, StringRef TT) {
-		MCAsmInfo *MAI = new LC3bMCAsmInfo(TT);
-		MachineLocation Dst(MachineLocation::VirtualFP);
-		//MachineLocation Src(LC3b::SP, 0); FIXME
-		//MAI->addInitialFrameState(0, Dst, Src); FIXME
-		return MAI;
-}
-
-static MCCodeGenInfo *createLC3bMCCodeGenInfo(StringRef TT, Reloc::Model RM,CodeModel::Model CM, CodeGenOpt::Level OL) {
-		MCCodeGenInfo *X = new MCCodeGenInfo();
-		if (CM == CodeModel::JITDefault)
-		RM = Reloc::Static;
-		else if (RM == Reloc::Default)
-		RM = Reloc::PIC_;
-		X->InitMCCodeGenInfo(RM, CM, OL); // defined in lib/MC/MCCodeGenInfo.cpp
-		return X;
-}
-
 static MCInstPrinter *createLC3bMCInstPrinter(const Target &T,
                                               unsigned SyntaxVariant,
                                               const MCAsmInfo &MAI,
@@ -111,9 +92,6 @@ extern "C" void LLVMInitializeLC3bTargetMC() {
    // Register the MC asm info.
    // FIXME
    RegisterMCAsmInfo<LC3bMCAsmInfo> X(TheLC3bTarget);
-
-   // Register the MC codegen info.
-   TargetRegistry::RegisterMCCodeGenInfo(TheLC3bTarget, createLC3bMCCodeGenInfo);
 
    // Register the MC instruction info.
    TargetRegistry::RegisterMCInstrInfo(TheLC3bTarget, createLC3bMCInstrInfo);

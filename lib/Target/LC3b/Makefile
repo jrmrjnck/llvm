@@ -16,8 +16,6 @@ BUILT_SOURCES = \
 	LC3bGenRegisterInfo.inc\
 	LC3bGenInstrInfo.inc\
 	LC3bGenSubtargetInfo.inc\
-	LC3bGenCodeEmitter.inc\
-	LC3bGenMCCodeEmitter.inc\
 	LC3bGenAsmWriter.inc\
 	LC3bGenCallingConv.inc\
 	LC3bGenDAGISel.inc

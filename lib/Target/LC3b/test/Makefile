@@ -4,7 +4,7 @@
 all : test.s
 
 test.ll : test.c
-	clang -target mips -S -emit-llvm test.c -o test.ll
+	clang -S -emit-llvm test.c -o test.ll
 
 test.s : test.ll
-	llc -march=lc3b test.ll -o test.s
+	llc -march=lc3b test.ll -o test.s --stats -O0

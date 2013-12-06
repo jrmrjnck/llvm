@@ -12,11 +12,11 @@
 //===----------------------------------------------------------------------===//
 
 class LC3bReg<string n> : Register<n> {
-	field bits <3> Num;
+	field bits <4> Num;
 	let Namespace = "LC3b";
 }
 
-class LC3bGPRReg <bits<3> num, string n> : LC3bReg<n> {
+class LC3bGPRReg <bits<4> num, string n> : LC3bReg<n> {
 	let Num=num;
 }
 
@@ -36,9 +36,9 @@ let Namespace = "LC3b" in {
 	def R5 : LC3bGPRReg <5, "R5">, 	DwarfRegNum<[5]>;
 	def R6 : LC3bGPRReg <6, "R6">, 	DwarfRegNum<[6]>;
 	def R7 : LC3bGPRReg <7, "R7">, 	DwarfRegNum<[7]>;
-// def PC : LC3bGPRReg <8, "PC">, 	DwarfRegNum<[9]>;
-//	def PSR : LC3bGPRReg <9, "PSR">,DwarfRegNum<[8]>;
-//	def IR : LC3bGPRReg <10, "IR">, DwarfRegNum<[10]>;
+	def PC : LC3bGPRReg <8, "PC">, 	DwarfRegNum<[9]>;
+	def PSR : LC3bGPRReg <9, "PSR">,DwarfRegNum<[8]>;
+	def IR : LC3bGPRReg <10, "IR">, DwarfRegNum<[10]>;
 
 }
 
@@ -47,10 +47,11 @@ let Namespace = "LC3b" in {
 /// check for third arguement 16
 def LC3bRegs : RegisterClass <"LC3b", [i16], 16, 
 	( add R0, R1, R2, R3, R4, R5,
-		//not allocatable registers
-	    R6, 	//Stack Pointer
-	    R7 	// Return Address
-//	    PSR, 	// Status Register
-//	    IR, 	// Instruction Register
+	//non-allocatable registers
+	R6, 	// Stack Pointer
+	R7, 	// Return Address
+	PC,		// Program Counter
+	PSR, 	// Status Register
+	IR 	// Instruction Register
 	)>;
  

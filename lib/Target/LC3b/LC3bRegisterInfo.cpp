@@ -24,15 +24,15 @@ using namespace llvm;
 const uint16_t* LC3bRegisterInfo::getCalleeSavedRegs(const MachineFunction* MF) const
 {
    // FIXME
-   assert(false && "Unimplemented");
+   //assert(false && "Unimplemented");
    return NULL;
 }
 
 BitVector LC3bRegisterInfo::getReservedRegs(const MachineFunction& MF) const
 {
    // FIXME
-   assert(false && "Unimplemented");
-   return BitVector();
+   //assert(false && "Unimplemented");
+   return BitVector(9,false);
 }
 
 void LC3bRegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator MI,
@@ -40,12 +40,12 @@ void LC3bRegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator MI,
                          RegScavenger *RS) const
 {
    // FIXME
-   assert(false && "Unimplemented");
+   //assert(false && "Unimplemented");
 }
 
 unsigned LC3bRegisterInfo::getFrameRegister(const MachineFunction &MF) const
 {
    // FIXME
-   assert(false && "Unimplemented");
+   //assert(false && "Unimplemented");
    return unsigned();
 }

@@ -34,6 +34,8 @@
 #include "llvm/Support/ErrorHandling.h"
 #include "llvm/Support/raw_ostream.h"
 
+#include <iostream>
+
 using namespace llvm;
 
 LC3bTargetLowering::LC3bTargetLowering(LC3bTargetMachine &TM)
@@ -69,5 +71,6 @@ SDValue LC3bTargetLowering::LowerReturn(SDValue Chain,
 {
    // FIXME
    //return DAG.getNode(LC3bISD::Ret, dl, MVT::Other, Chain, DAG.getRegister(LC3b::LR, MVT::i32));
+   std::cout << "Here it broke!!!!!\n";   
    return Chain;
 }

@@ -16,6 +16,7 @@
 #include "llvm/Target/TargetInstrInfo.h"
 #include "llvm/Target/TargetMachine.h"
 #include "llvm/Support/raw_os_ostream.h"
+#include <iostream>
 
 using namespace llvm;
 
@@ -406,6 +407,12 @@ void MachineRegisterInfo::dumpUses(unsigned Reg) const {
 
 void MachineRegisterInfo::freezeReservedRegs(const MachineFunction &MF) {
   ReservedRegs = getTargetRegisterInfo()->getReservedRegs(MF);
+
+  std::cout << "ReservedRegs size: " << ReservedRegs.size();
+  std::cout << "\nTarget Size: " << getTargetRegisterInfo()->getNumRegs();
+  std::cout << "\n";
+  std::cout.flush();
+  
   assert(ReservedRegs.size() == getTargetRegisterInfo()->getNumRegs() &&
          "Invalid ReservedRegs vector from target");
 }

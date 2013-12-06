@@ -1,4 +1,4 @@
-int f( int a )
+void f()
 {
-   return a + 3;
+	1 + 2;
 }

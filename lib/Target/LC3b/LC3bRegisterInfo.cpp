@@ -25,14 +25,14 @@ const uint16_t* LC3bRegisterInfo::getCalleeSavedRegs(const MachineFunction* MF) 
 {
    // FIXME
    //assert(false && "Unimplemented");
-   return NULL;
+   return new uint16_t;
 }
 
 BitVector LC3bRegisterInfo::getReservedRegs(const MachineFunction& MF) const
 {
    // FIXME
    //assert(false && "Unimplemented");
-   return BitVector(9,false);
+   return BitVector(12,false);
 }
 
 void LC3bRegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator MI,

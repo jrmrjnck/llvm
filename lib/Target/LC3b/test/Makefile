@@ -7,4 +7,4 @@ test.ll : test.c
 	clang -S -emit-llvm test.c -o test.ll
 
 test.s : test.ll
-	llc -march=lc3b test.ll -o test.s --stats
+	llc -march=lc3b test.ll -o test.s --stats -O0

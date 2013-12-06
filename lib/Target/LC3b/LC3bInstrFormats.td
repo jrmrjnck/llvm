@@ -119,8 +119,33 @@ class DestOneSrcForm_lea<bits<4> opcode, SourceMode immsext9, dag outs, dag ins,
    let Inst{11-9}=dst;
 }
 
+
+
+
+
+
+
+
+
+class jmpForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
+: LC3bInst<opcode, outs, ins, DestOneSrc, asmstr, itin> {
+	let isBranch = 1;
+	let isTerminator = 1;
+	let isBarrier = 1;
+	let hasDelaySlot = 0;
+	let Pattern = pattern;
+
+	bits<3> src1;
+	let Inst{8-6} = src1;
+	let Inst{5-0} =0;
+	let Inst{11-9}=0;
+}
+
+
+
+
 class jsrrForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin>
-: LC3bInst<opcode, outs, ins, OneSrc, asmstr, itin> {
+: LC3bInst<opcode, outs, ins, DestOneSrc, asmstr, itin> {
 	let isBranch = 1;
 	let isTerminator = 1;
 	let isBarrier = 1;
@@ -131,26 +156,6 @@ class jsrrForm<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> patte
 	let Inst{11} = 1;
 	let Inst{10-0} = addr;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

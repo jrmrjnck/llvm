@@ -26,7 +26,7 @@ def IIStore            : InstrItinClass;
 def IIBranch           : InstrItinClass;
 def IITrap             : InstrItinClass;
 def IIPseudo           : InstrItinClass;
-
+def IIRet			   : InstrItinClass;
 //===----------------------------------------------------------------------===//
 // LC3b Generic instruction itineraries.
 //===----------------------------------------------------------------------===//

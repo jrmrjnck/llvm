@@ -9,6 +9,15 @@
 
 include "LC3bInstrFormats.td"
 
+
+
+
+def LC3bRet : SDNode<"LC3bISD::Ret", SDTNone,
+                     [SDNPHasChain, SDNPOptInGlue, SDNPVariadic]>;
+
+
+
+
 def simm5 : Operand<i16>{
 	let DecoderMethod= "DecodeSimm5";
 }
@@ -88,6 +97,7 @@ def load_a  : AlignedLoad<load>;
 def store_a : AlignedStore<store>;
 
 
+
 def ADDrr : rrForm<0x1, (outs LC3bRegs:$dst), (ins LC3bRegs:$src1, LC3bRegs:$src2),
                    "add $dst, $src1, $src2", [(set LC3bRegs:$dst, (add LC3bRegs:$src1, LC3bRegs:$src2))], IIAlu>;
 
@@ -120,19 +130,27 @@ def XORri : riForm <0x9,(outs LC3bRegs:$dst), (ins LC3bRegs:$src1, simm5:$immsex
 /*def LEA :*/
 
 def lea : leaForm <0xe,(outs LC3bRegs:$dst), (ins simm9:$immsext9),
-                   	"lea $dst, $immsext9",[(set LC3bRegs:$dst, (add 0, immSExt9:$immsext9))], IILea>;
+                   	"lea $dst, $immsext9",[(set LC3bRegs:$dst, (immSExt9:$immsext9))], IILea>;
 
 
 /*def BR :*/
 
+
+/* def RET: */
+def RET : jmpForm<0xc, (outs), (ins), "ret", [(LC3bRet)], IIRet>; 
+
 /*def JMP :*/
 
+def JMP : jmpForm <0xc,(outs), (ins LC3bRegs:$src1), "jmp LC3Regs:$src1", [(brind  LC3bRegs:$src1)], IIBranch>;
+
 /*def JSR :*/
-
+/*
+def JSR : jmpForm <0xc,(outs), (ins LC3bRegs:$src1), "jmp LC3Regs:$src1", [(brind  LC3bRegs:$src1)], IIBranch>;
+*/
 /*def JSRR :*/
-def JSRR     : jsrrForm<0x4,(outs), (ins jmptarget:$addr),
-			"jsrr $addr", [(br bb:$addr)], IIBranch>;
-
+/*
+def JSRR     : jsrrForm<0x4,(outs), (ins jmptarget:$addr),"jsrr $addr", [(br bb:$addr)], IIBranch>;
+*/
 /*def LDB :*/
 def LDBri : memForm < 0x2,(outs LC3bRegs:$dst), (ins LC3bRegs:$src1, mem:$addr),
            "ldb $dst, $src1 ,$addr",[(set LC3bRegs:$dst, (sextloadi8 (add LC3bRegs:$src1, addr:$addr)))], IILoad>;

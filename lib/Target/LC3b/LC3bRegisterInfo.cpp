@@ -21,31 +21,32 @@
 
 using namespace llvm;
 
-const uint16_t* LC3bRegisterInfo::getCalleeSavedRegs(const MachineFunction* MF) const
-{
-   // FIXME
-   //assert(false && "Unimplemented");
-   return new uint16_t;
-}
+// Use return address register to initialize LC3bRegisterInfo
+LC3bRegisterInfo::LC3bRegisterInfo(const LC3bTargetMachine& TM) : LC3bGenRegisterInfo(LC3b::R7){}
+
+// No callee-saved registers in LC3b
+//const uint16_t* LC3bRegisterInfo::getCalleeSavedRegs(const MachineFunction* MF) const{}
 
 BitVector LC3bRegisterInfo::getReservedRegs(const MachineFunction& MF) const
 {
-   // FIXME
-   //assert(false && "Unimplemented");
-   return BitVector(12,false);
+   static const uint16_t ReservedLC3bRegs[] = {
+      LC3b::R6, LC3b::R7, LC3b::PC, LC3b::PSR, LC3b::IR
+   };
+   BitVector Reserved(getNumRegs());
+   typedef TargetRegisterClass::iterator RegIter;
+   
+   for(unsigned I = 0; I < array_lengthof(ReservedLC3bRegs); ++I){
+      Reserved.set(ReservedLC3bRegs[I]);
+   }
+   
+   return Reserved;
 }
 
-void LC3bRegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator MI,
-                         int SPAdj, unsigned FIOperandNum,
-                         RegScavenger *RS) const
-{
-   // FIXME
-   //assert(false && "Unimplemented");
-}
+// No frame pointer in LC3b
+//void LC3bRegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator MI,
+//                         int SPAdj, unsigned FIOperandNum,
+//                         RegScavenger *RS) const
+//{}
 
-unsigned LC3bRegisterInfo::getFrameRegister(const MachineFunction &MF) const
-{
-   // FIXME
-   //assert(false && "Unimplemented");
-   return unsigned();
-}
+// No frame pointer in LC3b
+//unsigned LC3bRegisterInfo::getFrameRegister(const MachineFunction &MF) const{}
